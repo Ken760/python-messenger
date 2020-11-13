@@ -1,0 +1,6 @@
+importlib-metadata==2.0.0
+PyQt5==5.15.1
+PyQt5-sip==12.8.1
+urllib3==1.25.11
+zipp==3.3.2
+requests==2.25.0
