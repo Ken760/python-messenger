@@ -9,7 +9,7 @@ class MessengerApp(QtWidgets.QMainWindow, messengerui.Ui_Messenger):
         super().__init__()
         self.setupUi(self)
 
-        self.some_button.pressed.connect(self.send_message)
+        self.sendButton.pressed.connect(self.send_message)
 
     def send_message(self):
         name = self.nameInput.text()
