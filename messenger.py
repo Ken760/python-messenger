@@ -1,6 +1,6 @@
 import requests
 from PyQt5 import QtWidgets, QtCore
-from datetime import time, datetime
+from datetime import datetime
 
 import messengerui
 
@@ -22,18 +22,18 @@ class MessengerApp(QtWidgets.QMainWindow, messengerui.Ui_Messenger):
     def update_messages(self):
         try:
             response = requests.get(
-                self.url + 'messages',
-                params={'after': self.after}
+                self.url + "messages",
+                params={"after": self.after}
             )
         except:
             return
 
         for message in response.json()['messages']:
-            dt = datetime.fromtimestamp(message['time '])
-            dt = dt.strftime('%H:%M:%S ')
+            dt = datetime.fromtimestamp(message['time'])
+            dt = dt.strftime('%H:%M')
 
-            self.messagesBrowser.append(dt + message['name'])
-            self.messagesBrowser.append(message['text'])
+            self.messagesBrowser.append(message["name"] + " " + dt)
+            self.messagesBrowser.append(message["text"])
             self.messagesBrowser.append('')
 
             self.after = message['time']
@@ -43,18 +43,17 @@ class MessengerApp(QtWidgets.QMainWindow, messengerui.Ui_Messenger):
         text = self.textInput.toPlainText()
         try:
             response = requests.post(
-                self.url + 'send',
-                json={'text': text, 'name': name}
+                self.url + "send", json={"text": text, "name": name}
             )
         except:
-            self.messagesBrowser.append('Сервер недоступен. Попробуйте позднее')
-            self.messagesBrowser.append('')
+            self.messagesBrowser.append("Сервер недоступен. Попробуйте позднее")
+            self.messagesBrowser.append("")
             self.messagesBrowser.repaint()
             return
 
         if response.status_code == 400:
-            self.messagesBrowser.append('Неправильные имя и/или пароль')
-            self.messagesBrowser.append('')
+            self.messagesBrowser.append("Не заполнены имя и/или пароль")
+            self.messagesBrowser.append("")
             self.messagesBrowser.repaint()
             return
 
@@ -63,6 +62,6 @@ class MessengerApp(QtWidgets.QMainWindow, messengerui.Ui_Messenger):
 
 
 app = QtWidgets.QApplication([])
-window = MessengerApp('https://a9cc132a7ea2.ngrok.io')
+window = MessengerApp('') # url сервера
 window.show()
 app.exec_()

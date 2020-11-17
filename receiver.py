@@ -11,7 +11,7 @@ while True:
     )
     for message in response.json()['messages']:
         dt = datetime.fromtimestamp(message['time'])
-        dt = dt.strftime('%H:%M:%S')
+        dt = dt.strftime('%H:%M')
 
         print(dt, message['name'])
         print(message['text'])
