@@ -11,28 +11,51 @@ app = Flask(__name__)
 db = [
     {
         'text': 'Hello',
-        'name': 'John',
-        'time': time.time()
-    }, {
-        'text': 'Hello too',
-        'name': 'Jane',
+        'name': 'None ',
         'time': time.time()
     }
 ]
 
+format_date = '%d/%m/%Y %H:%M:%S'
+
+
+def last_message():
+    result = {}
+    last_time = 0
+    for message in db:
+        if last_time < message['time']:
+            last_time = message['time']
+            result = message
+    return result
+
+
+def count_authors():
+    authors = {}
+    for message in db:
+        if message['name'] in authors:
+            authors[message['name']] += 1
+        else:
+            authors[message['name']] = 1
+        return len(authors)
+
 
 @app.route("/")
 def hello():
-    return "Hello, World! <a href='/status'>Статистика</a>"
+    return "<a href='/status'>Статистика</a>"
 
 
 @app.route("/status")
-def stats():
-    return {
-        'status': True,
-        'name': 'Messenger',
-        'time': datetime.now().strftime('%H:%M:%S %d/%m/%Y')
-    }
+def get_status():
+    last_mes = last_message()
+    return f'<p>Название мессенджера:<b> Messenger<b></p>' \
+        f'<p>Статус мессенджера:<b> В работе!<b></p>' \
+        f'<p>Всего сообщений:<b> {len(db)}<b></p>' \
+        f'<p>Всего авторов сообщений:<b> {count_authors()}<b></p>'\
+        f'<p>Последнее сообщение:' \
+        f'<p>{datetime.fromtimestamp(last_mes["time"]).strftime(format_date)} от {last_mes["name"]}</p>' \
+        f'<p>{last_mes["text"]}</p>'\
+        f'<br>'\
+        f'<p>Время обновления информации на этой странице: {datetime.now().strftime(format_date)}'
 
 
 @app.route("/send", methods=['POST'])

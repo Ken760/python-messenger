@@ -1,22 +1,49 @@
 import requests
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets, QtCore
+from datetime import time, datetime
 
 import messengerui
 
 
 class MessengerApp(QtWidgets.QMainWindow, messengerui.Ui_Messenger):
-    def __init__(self):
+    def __init__(self, url):
         super().__init__()
         self.setupUi(self)
 
+        self.url = url
+
         self.sendButton.pressed.connect(self.send_message)
+
+        self.after = 0
+        self.timer = QtCore.QTimer()
+        self.timer.timeout.connect(self.update_messages)
+        self.timer.start(1000)
+
+    def update_messages(self):
+        try:
+            response = requests.get(
+                self.url + 'messages',
+                params={'after': self.after}
+            )
+        except:
+            return
+
+        for message in response.json()['messages']:
+            dt = datetime.fromtimestamp(message['time '])
+            dt = dt.strftime('%H:%M:%S ')
+
+            self.messagesBrowser.append(dt + message['name'])
+            self.messagesBrowser.append(message['text'])
+            self.messagesBrowser.append('')
+
+            self.after = message['time']
 
     def send_message(self):
         name = self.nameInput.text()
         text = self.textInput.toPlainText()
         try:
             response = requests.post(
-                'http://127.0.0.1:5000/send',
+                self.url + 'send',
                 json={'text': text, 'name': name}
             )
         except:
@@ -36,6 +63,6 @@ class MessengerApp(QtWidgets.QMainWindow, messengerui.Ui_Messenger):
 
 
 app = QtWidgets.QApplication([])
-window = MessengerApp()
+window = MessengerApp('https://a9cc132a7ea2.ngrok.io')
 window.show()
 app.exec_()
