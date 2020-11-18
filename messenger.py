@@ -1,6 +1,7 @@
+from datetime import datetime
+
 import requests
 from PyQt5 import QtWidgets, QtCore
-from datetime import datetime
 
 import messengerui
 
@@ -12,18 +13,17 @@ class MessengerApp(QtWidgets.QMainWindow, messengerui.Ui_Messenger):
 
         self.url = url
 
-        self.sendButton.pressed.connect(self.send_message)
-
         self.after = 0
         self.timer = QtCore.QTimer()
         self.timer.timeout.connect(self.update_messages)
+        self.sendButton.pressed.connect(self.send_message)
         self.timer.start(1000)
 
     def update_messages(self):
         try:
             response = requests.get(
-                self.url + "messages",
-                params={"after": self.after}
+                self.url + 'messages',
+                params={'after': self.after}
             )
         except:
             return
@@ -40,20 +40,20 @@ class MessengerApp(QtWidgets.QMainWindow, messengerui.Ui_Messenger):
 
     def send_message(self):
         name = self.nameInput.text()
-        text = self.textInput.toPlainText()
+        text = self.sendButton.text()
         try:
             response = requests.post(
-                self.url + "send", json={"text": text, "name": name}
+                self.url + 'send',
+                json={'text': text, 'name': name}
             )
         except:
-            self.messagesBrowser.append("Сервер недоступен. Попробуйте позднее")
-            self.messagesBrowser.append("")
+            self.messagesBrowser.append('Сервер недоступен. Попробуйте позднее')
+            self.messagesBrowser.append('')
             self.messagesBrowser.repaint()
             return
-
         if response.status_code == 400:
-            self.messagesBrowser.append("Не заполнены имя и/или пароль")
-            self.messagesBrowser.append("")
+            self.messagesBrowser.append('Не заполнены имя и/или текст')
+            self.messagesBrowser.append('')
             self.messagesBrowser.repaint()
             return
 
@@ -62,6 +62,6 @@ class MessengerApp(QtWidgets.QMainWindow, messengerui.Ui_Messenger):
 
 
 app = QtWidgets.QApplication([])
-window = MessengerApp('') # url сервера
+window = MessengerApp('https://62f4d22cdfa0.ngrok.io')
 window.show()
 app.exec_()

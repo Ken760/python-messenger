@@ -14,74 +14,110 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Messenger(object):
     def setupUi(self, Messenger):
         Messenger.setObjectName("Messenger")
-        Messenger.resize(390, 493)
+        Messenger.resize(461, 550)
         Messenger.setStyleSheet("background-color: rgb(65, 74, 76);\n"
-                                "background-color: rgb(10, 10, 10);")
+                                "background-color: rgb(10, 10, 10);\n"
+                                "")
         self.centralwidget = QtWidgets.QWidget(Messenger)
+        self.centralwidget.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.centralwidget.setStyleSheet("background-color: #222126")
         self.centralwidget.setObjectName("centralwidget")
-        self.sendButton = QtWidgets.QPushButton(self.centralwidget)
-        self.sendButton.setGeometry(QtCore.QRect(350, 431, 30, 30))
-        self.sendButton.setStyleSheet("color: rgb(255, 255, 255);\n"
-                                      "background-color: rgb(41, 47, 48);")
-        self.sendButton.setObjectName("sendButton")
         self.messagesBrowser = QtWidgets.QTextBrowser(self.centralwidget)
-        self.messagesBrowser.setGeometry(QtCore.QRect(10, 90, 371, 331))
+        self.messagesBrowser.setGeometry(QtCore.QRect(10, 130, 441, 341))
         self.messagesBrowser.setStyleSheet("background-color: rgb(22, 26, 30);\n"
-                                           "color: rgb(255, 255, 255);\n"
-                                           "border-color: rgb(170, 0, 0);")
-        self.messagesBrowser.setFrameShape(QtWidgets.QFrame.Panel)
+                                           "color: white;\n"
+                                           "border: 1px solid #22222e;")
+        self.messagesBrowser.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.messagesBrowser.setLineWidth(5)
         self.messagesBrowser.setObjectName("messagesBrowser")
-        self.title = QtWidgets.QLabel(self.centralwidget)
-        self.title.setGeometry(QtCore.QRect(0, 0, 391, 51))
+        self.frame = QtWidgets.QFrame(self.centralwidget)
+        self.frame.setGeometry(QtCore.QRect(-20, 0, 531, 91))
+        self.frame.setStyleSheet("background-color: #22222e")
+        self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame.setObjectName("frame")
+        self.label = QtWidgets.QLabel(self.frame)
+        self.label.setGeometry(QtCore.QRect(180, 30, 151, 31))
         font = QtGui.QFont()
-        font.setFamily("Myanmar Text")
-        font.setPointSize(18)
-        self.title.setFont(font)
-        self.title.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.title.setAutoFillBackground(False)
-        self.title.setStyleSheet("color: rgb(255, 255, 255);\n"
-                                 "background-color: rgb(22, 26, 30);")
-        self.title.setFrameShape(QtWidgets.QFrame.NoFrame)
-        self.title.setLineWidth(10)
-        self.title.setTextFormat(QtCore.Qt.AutoText)
-        self.title.setAlignment(QtCore.Qt.AlignCenter)
-        self.title.setWordWrap(False)
-        self.title.setIndent(-1)
-        self.title.setObjectName("title")
+        font.setPointSize(14)
+        self.label.setFont(font)
+        self.label.setStyleSheet("color: white\n"
+                                 "")
+        self.label.setAlignment(QtCore.Qt.AlignCenter)
+        self.label.setObjectName("label")
+        self.label_2 = QtWidgets.QLabel(self.frame)
+        self.label_2.setGeometry(QtCore.QRect(40, 10, 71, 71))
+        self.label_2.setText("")
+        self.label_2.setPixmap(QtGui.QPixmap("images_messenger/logo.png"))
+        self.label_2.setObjectName("label_2")
+        self.frame_2 = QtWidgets.QFrame(self.centralwidget)
+        self.frame_2.setGeometry(QtCore.QRect(0, 480, 471, 61))
+        self.frame_2.setStyleSheet("background-color: #22222e")
+        self.frame_2.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_2.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_2.setObjectName("frame_2")
+        self.sendButton = QtWidgets.QPushButton(self.frame_2)
+        self.sendButton.setGeometry(QtCore.QRect(390, 10, 41, 41))
+        self.sendButton.setStyleSheet("background-color: #22222e;\n"
+                                      "\n"
+                                      "\n"
+                                      "\n"
+                                      "\n"
+                                      "\n"
+                                      "\n"
+                                      "\n"
+                                      "")
+        self.sendButton.setText("")
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("images_messenger/send_message.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.sendButton.setIcon(icon)
+        self.sendButton.setIconSize(QtCore.QSize(25, 25))
+        self.sendButton.setAutoDefault(False)
+        self.sendButton.setObjectName("sendButton")
+        self.textInput = QtWidgets.QLineEdit(self.frame_2)
+        self.textInput.setGeometry(QtCore.QRect(20, 10, 351, 41))
+        self.textInput.setStyleSheet("color: white;\n"
+                                     "background-color: #22222e;\n"
+                                     "border: 2px solid gray;\n"
+                                     "border-radius: 20px;")
+        self.textInput.setObjectName("textInput")
         self.nameInput = QtWidgets.QLineEdit(self.centralwidget)
-        self.nameInput.setGeometry(QtCore.QRect(10, 60, 141, 27))
+        self.nameInput.setGeometry(QtCore.QRect(90, 100, 311, 21))
         font = QtGui.QFont()
         font.setFamily("Myanmar Text")
-        font.setPointSize(7)
+        font.setPointSize(8)
         self.nameInput.setFont(font)
         self.nameInput.setCursor(QtGui.QCursor(QtCore.Qt.IBeamCursor))
         self.nameInput.setFocusPolicy(QtCore.Qt.StrongFocus)
         self.nameInput.setContextMenuPolicy(QtCore.Qt.DefaultContextMenu)
         self.nameInput.setAcceptDrops(True)
         self.nameInput.setToolTip("")
-        self.nameInput.setStyleSheet("color: rgb(255, 255, 255);\n"
-                                     "background-color: rgb(65, 74, 76);\n"
-                                     "")
+        self.nameInput.setStyleSheet("color: white;\n"
+                                     "background-color: #22222e;\n"
+                                     "border: 2px solid #22222e;\n"
+                                     "border-radius: 20px;")
         self.nameInput.setFrame(False)
         self.nameInput.setEchoMode(QtWidgets.QLineEdit.Normal)
         self.nameInput.setAlignment(QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
         self.nameInput.setObjectName("nameInput")
-        self.textInput = QtWidgets.QTextEdit(self.centralwidget)
-        self.textInput.setGeometry(QtCore.QRect(10, 430, 331, 31))
-        font = QtGui.QFont()
-        font.setFamily("Myanmar Text")
-        font.setPointSize(7)
-        self.textInput.setFont(font)
-        self.textInput.setStyleSheet("color: rgb(255, 255, 255);\n"
-                                     "background-color: rgb(87, 102, 105);\n"
-                                     "background-color: rgb(65, 74, 76);")
-        self.textInput.setFrameShape(QtWidgets.QFrame.NoFrame)
-        self.textInput.setObjectName("textInput")
+        self.label_3 = QtWidgets.QLabel(self.centralwidget)
+        self.label_3.setGeometry(QtCore.QRect(410, 90, 41, 41))
+        self.label_3.setStyleSheet("color: white;")
+        self.label_3.setText("")
+        self.label_3.setPixmap(QtGui.QPixmap("images_messenger/img2.png"))
+        self.label_3.setObjectName("label_3")
+        self.label_4 = QtWidgets.QLabel(self.centralwidget)
+        self.label_4.setGeometry(QtCore.QRect(10, 100, 71, 31))
+        self.label_4.setText("")
+        self.label_4.setPixmap(QtGui.QPixmap("images_messenger/img1.png"))
+        self.label_4.setObjectName("label_4")
+        self.frame.raise_()
+        self.messagesBrowser.raise_()
+        self.frame_2.raise_()
+        self.nameInput.raise_()
+        self.label_3.raise_()
+        self.label_4.raise_()
         Messenger.setCentralWidget(self.centralwidget)
-        self.statusbar = QtWidgets.QStatusBar(Messenger)
-        self.statusbar.setObjectName("statusbar")
-        Messenger.setStatusBar(self.statusbar)
 
         self.retranslateUi(Messenger)
         QtCore.QMetaObject.connectSlotsByName(Messenger)
@@ -89,7 +125,6 @@ class Ui_Messenger(object):
     def retranslateUi(self, Messenger):
         _translate = QtCore.QCoreApplication.translate
         Messenger.setWindowTitle(_translate("Messenger", "Messenger"))
-        self.sendButton.setText(_translate("Messenger", ">"))
-        self.title.setText(_translate("Messenger", "Messenger"))
-        self.nameInput.setPlaceholderText(_translate("Messenger", "Введите ваше имя..."))
-        self.textInput.setPlaceholderText(_translate("Messenger", "Напишете сообщение..."))
+        self.label.setText(_translate("Messenger", "Catssenger"))
+        self.textInput.setPlaceholderText(_translate("Messenger", "Напишите сообщение маф..."))
+        self.nameInput.setPlaceholderText(_translate("Messenger", "Введите ваше имя маф..."))

@@ -1,7 +1,7 @@
-import requests
+import time
 from datetime import datetime
 
-import time
+import requests
 
 after = 0
 
@@ -11,7 +11,7 @@ while True:
     )
     for message in response.json()['messages']:
         dt = datetime.fromtimestamp(message['time'])
-        dt = dt.strftime('%H:%M')
+        dt = dt.strftime('%H:%M:%S')
 
         print(dt, message['name'])
         print(message['text'])
