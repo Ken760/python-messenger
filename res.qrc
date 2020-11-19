@@ -1,0 +1,8 @@
+<RCC>
+  <qresource prefix="/">
+    <file>images_messenger/img1.png</file>
+      <file>images_messenger/img2.png</file>
+      <file>images_messenger/logo.png</file>
+      <file>images_messenger/send_message.png</file>
+  </qresource>
+</RCC>

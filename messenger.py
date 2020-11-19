@@ -1,8 +1,10 @@
 from datetime import datetime
 
 import requests
-from PyQt5 import QtWidgets, QtCore
+from PyQt5 import QtWidgets, QtCore, QtGui
+from PyQt5.QtGui import QIcon
 
+import res_rc
 import messengerui
 
 
@@ -19,6 +21,11 @@ class MessengerApp(QtWidgets.QMainWindow, messengerui.Ui_Messenger):
         self.timer = QtCore.QTimer()
         self.timer.timeout.connect(self.update_messages)
         self.timer.start(1000)
+        self.init_UI()
+
+    def init_UI(self):
+        self.setWindowTitle('Messenger')
+        self.setWindowIcon(QIcon('images_messenger/cat-in-black-silhouette.png'))
 
     def update_messages(self):
         try:
@@ -41,7 +48,7 @@ class MessengerApp(QtWidgets.QMainWindow, messengerui.Ui_Messenger):
 
     def send_message(self):
         name = self.nameInput.text()
-        text = self.sendButton.text()
+        text = self.textInput.text()
         try:
             response = requests.post(
                 self.url + 'send',

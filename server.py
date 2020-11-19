@@ -82,7 +82,7 @@ def get_messages():
     if 'after' in request.args:
         try:
             # проверка формата after
-            after = float(request.args['after'])
+            after = float(request.args.get['after'])
         except:
             print('error')
             return abort(400)
