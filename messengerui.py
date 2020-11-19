@@ -16,8 +16,8 @@ class Ui_Messenger(object):
         Messenger.setObjectName("Messenger")
         Messenger.resize(461, 550)
         Messenger.setStyleSheet("background-color: rgb(65, 74, 76);\n"
-                                "background-color: rgb(10, 10, 10);\n"
-                                "")
+"background-color: rgb(10, 10, 10);\n"
+"")
         self.centralwidget = QtWidgets.QWidget(Messenger)
         self.centralwidget.setFocusPolicy(QtCore.Qt.NoFocus)
         self.centralwidget.setStyleSheet("background-color: #222126")
@@ -25,8 +25,8 @@ class Ui_Messenger(object):
         self.messagesBrowser = QtWidgets.QTextBrowser(self.centralwidget)
         self.messagesBrowser.setGeometry(QtCore.QRect(10, 130, 441, 341))
         self.messagesBrowser.setStyleSheet("background-color: rgb(22, 26, 30);\n"
-                                           "color: white;\n"
-                                           "border: 1px solid #22222e;")
+"color: white;\n"
+"border: 1px solid #22222e;")
         self.messagesBrowser.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.messagesBrowser.setLineWidth(5)
         self.messagesBrowser.setObjectName("messagesBrowser")
@@ -42,7 +42,7 @@ class Ui_Messenger(object):
         font.setPointSize(14)
         self.label.setFont(font)
         self.label.setStyleSheet("color: white\n"
-                                 "")
+"")
         self.label.setAlignment(QtCore.Qt.AlignCenter)
         self.label.setObjectName("label")
         self.label_2 = QtWidgets.QLabel(self.frame)
@@ -59,14 +59,14 @@ class Ui_Messenger(object):
         self.sendButton = QtWidgets.QPushButton(self.frame_2)
         self.sendButton.setGeometry(QtCore.QRect(390, 10, 41, 41))
         self.sendButton.setStyleSheet("background-color: #22222e;\n"
-                                      "\n"
-                                      "\n"
-                                      "\n"
-                                      "\n"
-                                      "\n"
-                                      "\n"
-                                      "\n"
-                                      "")
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"")
         self.sendButton.setText("")
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("images_messenger/send_message.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -77,9 +77,9 @@ class Ui_Messenger(object):
         self.textInput = QtWidgets.QLineEdit(self.frame_2)
         self.textInput.setGeometry(QtCore.QRect(20, 10, 351, 41))
         self.textInput.setStyleSheet("color: white;\n"
-                                     "background-color: #22222e;\n"
-                                     "border: 2px solid gray;\n"
-                                     "border-radius: 20px;")
+"background-color: #22222e;\n"
+"border: 2px solid gray;\n"
+"border-radius: 20px;")
         self.textInput.setObjectName("textInput")
         self.nameInput = QtWidgets.QLineEdit(self.centralwidget)
         self.nameInput.setGeometry(QtCore.QRect(90, 100, 311, 21))
@@ -93,12 +93,12 @@ class Ui_Messenger(object):
         self.nameInput.setAcceptDrops(True)
         self.nameInput.setToolTip("")
         self.nameInput.setStyleSheet("color: white;\n"
-                                     "background-color: #22222e;\n"
-                                     "border: 2px solid #22222e;\n"
-                                     "border-radius: 20px;")
+"background-color: #22222e;\n"
+"border: 2px solid #22222e;\n"
+"border-radius: 20px;")
         self.nameInput.setFrame(False)
         self.nameInput.setEchoMode(QtWidgets.QLineEdit.Normal)
-        self.nameInput.setAlignment(QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
+        self.nameInput.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.nameInput.setObjectName("nameInput")
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
         self.label_3.setGeometry(QtCore.QRect(410, 90, 41, 41))

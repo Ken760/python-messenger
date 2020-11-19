@@ -85,7 +85,7 @@ def get_messages():
             after = float(request.args['after'])
         except:
             print('error')
-        return abort(400)
+            return abort(400)
     else:
         # дефолтное поведение
         after = 0
