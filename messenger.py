@@ -1,5 +1,5 @@
 from datetime import datetime
-
+import json
 import requests
 from PyQt5 import QtWidgets, QtCore
 
@@ -13,10 +13,11 @@ class MessengerApp(QtWidgets.QMainWindow, messengerui.Ui_Messenger):
 
         self.url = url
 
+        self.sendButton.pressed.connect(self.send_message)
+
         self.after = 0
         self.timer = QtCore.QTimer()
         self.timer.timeout.connect(self.update_messages)
-        self.sendButton.pressed.connect(self.send_message)
         self.timer.start(1000)
 
     def update_messages(self):
@@ -40,7 +41,7 @@ class MessengerApp(QtWidgets.QMainWindow, messengerui.Ui_Messenger):
 
     def send_message(self):
         name = self.nameInput.text()
-        text = self.sendButton.text()
+        text = self.textInput.text()
         try:
             response = requests.post(
                 self.url + 'send',
@@ -62,6 +63,6 @@ class MessengerApp(QtWidgets.QMainWindow, messengerui.Ui_Messenger):
 
 
 app = QtWidgets.QApplication([])
-window = MessengerApp('https://62f4d22cdfa0.ngrok.io')
+window = MessengerApp('http://127.0.0.1:5000/')
 window.show()
 app.exec_()
